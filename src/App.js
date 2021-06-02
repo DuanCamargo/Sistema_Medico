@@ -49,7 +49,7 @@ function App() {
           <Route exact path="/addPacientes" component={AddPacientes} />
           <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
           <Route exact path="/addFuncionarios" component={AddFuncionarios} />
-          <Route exact path="/addClinicas" component={AddClinicas} />
+          <Route exact path="/addClinicas/" component={AddClinicas} />
         </Switch>
       </div>
     </div>
