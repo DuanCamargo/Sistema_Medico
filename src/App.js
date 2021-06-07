@@ -12,7 +12,6 @@ import AddEnfermeiras from "./components/AddEnfermeiras";
 import EnfermeiraList from "./components/EnfermeiraList";
 import Clinica from "./components/Clinica";
 import AddClinicas from "./components/AddClinicas";
-import Clinica from './components/Clinica'
 import ClinicaList from './components/ClinicaList'
 import AddFuncionarios from "./components/AddFuncionarios";
 import Home from "./components/Home";
