@@ -12,11 +12,13 @@ const AddClinicas = () => {
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
 
+  //PASSANDO NAME E VALUE PARA AS CONSTANTES, E ATRIBUINDO O ITEM DO OBJETO NAME O QUE TEM VALUE
   const handleInputChange = event => {
     const {name, value} = event.target;
     setTutorial({...tutorial, [name]: value});
   }
 
+  //INSERINDO NOS DADOS.
   const saveTutorial = () => {
     var data = {
       title: tutorial.title,
@@ -44,6 +46,8 @@ const AddClinicas = () => {
         </div>
       ) : (
         <div>
+
+          {/**FORMULÁRIO PARA INCLUSÃO DOS DADOS */}
           <form onSubmit={saveTutorial}>
             <div className="form-group">
               <label htmlFor="title">Title</label>

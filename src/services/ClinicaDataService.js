@@ -3,6 +3,7 @@ let PRODUCTS =[
     {title: 'Teste', description: 'Teste', published: 'Published'}
 ]
 
+//RETORNA OS DADOS
 const getAll = () => {
     return PRODUCTS;
 };
@@ -13,7 +14,7 @@ const getById = (title) => {
     return filtrado
 };
 
-const create = (data) => {
+const create = (data) => { // colocando itens do formulário na variável PRODUCTS.
     return PRODUCTS.push(data);
 }
 
