@@ -59,16 +59,32 @@ function App() {
               </Link>
             </div>
           </div>
-          <button className="nav-item">
-            <Link to={"/addFuncionarios"} className="nav-link">
-            Adicionar Funcionário
-            </Link>
-          </button>
-          <button className="nav-item">
-            <Link to={"/addClinicas"} className="nav-link">
-              Adicionar Clínica
-            </Link>
-          </button>
+          <div class="dropdown">
+            <button type="button" class="btn dropdown-toggle" id="buttonColor" data-toggle="dropdown">
+            Funcionário
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <Link to={"/funcionarioList"} className="dropdown-item">
+                Lista de Funcionários
+              </Link>
+              <Link to={"/addFuncionarios"} className="dropdown-item">
+                Adicionar Funcionário
+              </Link>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button type="button" class="btn dropdown-toggle" id="buttonColor" data-toggle="dropdown">
+            Clínica
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <Link to={"/clínicaList"} className="dropdown-item">
+                Lista de Clínica
+              </Link>
+              <Link to={"/addClinicas"} className="dropdown-item">
+                Adicionar Clínica
+              </Link>
+            </div>
+          </div>
         </div>
       </nav>
       <div className="container mt-3">
@@ -77,7 +93,7 @@ function App() {
           <Route exact path="/medico" component={Medico} />
           <Route exact path="/addMedicos" component={AddMedicos} />
           <Route exact path="/medicoList" component={MedicoList} />
-          <Route exact path="/paciente" component={Paciente} />
+          {/* <Route exact path="/paciente" component={Paciente} /> */}
           <Route exact path="/addPacientes" component={AddPacientes} />
           <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
           <Route exact path="/enfermeiraList" component={MedicoList} />
