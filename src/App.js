@@ -9,6 +9,7 @@ import MedicoList from "./components/MedicoList";
 import AddPacientes from "./components/AddPacientes";
 // import PacienteList from "./components/PacienteList";
 import AddEnfermeiras from "./components/AddEnfermeiras";
+import EnfermeiraList from "./components/EnfermeiraList";
 import Clinica from "./components/Clinica";
 import AddClinicas from "./components/AddClinicas";
 import AddFuncionarios from "./components/AddFuncionarios";
@@ -77,10 +78,10 @@ function App() {
           <Route exact path="/medico" component={Medico} />
           <Route exact path="/addMedicos" component={AddMedicos} />
           <Route exact path="/medicoList" component={MedicoList} />
-          <Route exact path="/paciente" component={Paciente} />
+          {/*<Route exact path="/paciente" component={Paciente} />*/}
           <Route exact path="/addPacientes" component={AddPacientes} />
           <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
-          <Route exact path="/enfermeiraList" component={MedicoList} />
+          <Route exact path="/enfermeiraList" component={EnfermeiraList} />
           <Route exact path="/addFuncionarios" component={AddFuncionarios} />
           <Route exact path="/clinica/" component={Clinica} />
           <Route exact path="/addClinicas/" component={AddClinicas} />

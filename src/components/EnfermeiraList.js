@@ -56,8 +56,8 @@ const EnfermeiraList = () => {
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">titulo</th>
-              <th scope="col">descricao</th>
+              <th scope="col">Título</th>
+              <th scope="col">Descrição</th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>

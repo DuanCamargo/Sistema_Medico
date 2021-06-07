@@ -1,6 +1,6 @@
 let Enfermeira = [
     {titulo: 'Ola', descricao: 'Ola', published: 'Published'},
-    {titulo: 'Teste', descriicao: 'Teste', published: 'Published'}
+    {titulo: 'Teste', descricao: 'Teste', published: 'Published'}
   ]
   
   const getAll = () => {
