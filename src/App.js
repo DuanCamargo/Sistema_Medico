@@ -8,6 +8,8 @@ import MedicoList from "./components/MedicoList";
 import AddPacientes from "./components/AddPacientes";
 import AddEnfermeiras from "./components/AddEnfermeiras";
 import AddClinicas from "./components/AddClinicas";
+import Clinica from './components/Clinica'
+import ClinicaList from './components/ClinicaList'
 import AddFuncionarios from "./components/AddFuncionarios";
 import Home from "./components/Home";
 
@@ -74,6 +76,8 @@ function App() {
           <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
           <Route exact path="/addFuncionarios" component={AddFuncionarios} />
           <Route exact path="/addClinicas/" component={AddClinicas} />
+          <Route path="/clinica/:id" component={Clinica} />
+          <Route exact path="/clinicalist" component={ClinicaList} />
         </Switch>
       </div>
     </div>
