@@ -71,10 +71,10 @@ const MedicoList = () => {
                 <td>{tutorial.title}</td>
                 <td>{tutorial.description}</td>
                 <td> <Link to={"/Medico/" + tutorial.title}
-                  className="badge badge-warning">Edit</Link>
+                  className="btn btn-warning">Edit</Link>
                 </td>
                 <td> <Link onClick={() => deleteTutorial(tutorial.title)}
-                  className="badge badge-danger">Remove</Link>
+                  className="btn btn-danger">Remove</Link>
                 </td>
               </tr>
             ))}
