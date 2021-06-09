@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import TutorialDataService from "../services/MedicoDataService";
+import MedicoDataService from "../services/MedicoDataService";
 
 const MedicoList = () => {
-  
   const [searchTitle, setSearchTitle] = useState("");
-  const [tutorials, setTutorials] = useState(TutorialDataService.getAll());
+  const [tutorials, setTutorials] = useState(MedicoDataService.getAll());
 
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
@@ -14,18 +13,19 @@ const MedicoList = () => {
 
   const deleteTutorial = (id) => {
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.remove(id);
+      MedicoDataService.remove(id);
     }
   }
 
   const removeAllTutorials = () => {
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.removeAll();
-      setTutorials(TutorialDataService.getAll())
+      MedicoDataService.removeAll();
+      setTutorials(MedicoDataService.getAll())
     }
   };
+
   const findByTitle = () => {
-    setTutorials(TutorialDataService.getById(searchTitle))
+    setTutorials(MedicoDataService.getById(searchTitle))
   };
 
   return (
@@ -70,7 +70,7 @@ const MedicoList = () => {
                 <th scope="row">{tutorial.key}</th>
                 <td>{tutorial.title}</td>
                 <td>{tutorial.description}</td>
-                <td> <Link to={"/tutorials/" + tutorial.title}
+                <td> <Link to={"/Medico/" + tutorial.title}
                   className="badge badge-warning">Edit</Link>
                 </td>
                 <td> <Link onClick={() => deleteTutorial(tutorial.title)}
@@ -89,5 +89,4 @@ const MedicoList = () => {
     </div>
   );
 };
-
 export default MedicoList;

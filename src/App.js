@@ -14,6 +14,9 @@ import Clinica from "./components/Clinica";
 import AddClinicas from "./components/AddClinicas";
 import ClinicaList from './components/ClinicaList'
 import AddFuncionarios from "./components/AddFuncionarios";
+import Tutorial from "./components/Tutorial";
+import AddTutorial from "./components/AddTutorial";
+import TutorialsList from "./components/TutorialsList";
 import Home from "./components/Home";
 
 function App() {
@@ -91,10 +94,10 @@ function App() {
       </nav>
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/home"]} component={Home} />
-          <Route exact path="/medico" component={Medico} />
+          <Route exact path={"/home"} component={Home} />
+          <Route exact path="/medico/:id" component={Medico} />
           <Route exact path="/medicoAdd" component={MedicoAdd} />
-          <Route exact path="/medicoList" component={MedicoList} />
+          <Route exact path={["/", "/medicoList"]} component={MedicoList} />
           {/*<Route exact path="/paciente" component={Paciente} />*/}
           <Route exact path="/addPacientes" component={AddPacientes} />
           <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
@@ -104,6 +107,9 @@ function App() {
           <Route exact path="/addClinicas/" component={AddClinicas} />
           <Route path="/clinica/:id" component={Clinica} />
           <Route exact path="/clinicalist" component={ClinicaList} />
+          {/* <Route exact path={["/", "/tutorials"]} component={TutorialsList} />
+          <Route exact path="/add" component={AddTutorial} />
+          <Route path="/tutorials/:id" component={Tutorial} /> */}
         </Switch>
       </div>
     </div>

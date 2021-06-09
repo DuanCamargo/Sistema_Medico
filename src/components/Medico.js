@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TutorialDataService from "../services/MedicoDataService";
+import MedicoDataService from "../services/MedicoDataService";
 import { Link } from "react-router-dom";
 
 const Medico = props => {
@@ -9,13 +9,12 @@ const Medico = props => {
     description: "",
     published: "Unpublished",
   };
-
   const [message, setMessage] = useState("");
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
   const [key, setKey] = useState(props.match.params.id)
 
   useEffect(()=>{
-    const data = TutorialDataService.getById(key)
+    const data = MedicoDataService.getById(key)
     console.log(key)
     setCurrentTutorial(data[0])     
   }, [])
@@ -31,25 +30,24 @@ const Medico = props => {
       description: currentTutorial.description,
       published: status
     };
-    TutorialDataService.update(key, data);  
+    MedicoDataService.update(key, data);  
     setCurrentTutorial(data)
   };
 
   const updateTutorial = () => {
-    //console.log(currentTutorial)
     const data = {
       title: currentTutorial.title,
       description: currentTutorial.description,
       published: currentTutorial.published
     };  
-    TutorialDataService.update(key, data);
+    MedicoDataService.update(key, data);
     setCurrentTutorial(data)
   };
 
   const deleteTutorial = () => {
     console.log(currentTutorial)
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.remove(currentTutorial.key);  
+      MedicoDataService.remove(currentTutorial.key);  
     }
   };
 
@@ -126,6 +124,5 @@ const Medico = props => {
     </div>
   );
 };
-
 export default Medico;
 
