@@ -53,7 +53,12 @@ const Clinica = props => {
   }
 
   const deleteTutorial = () => {
+    if(window.confirm("Deseja deletar a clínica?")){
+      ClinicaDataService.remove(key);
 
+      //CHAMA A PAGINA LISTA DE CLINICAS
+      props.history.push("/clinicalist")
+    }
   };
 
   return (
