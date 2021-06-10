@@ -8,6 +8,7 @@ const Clinica = props => {
     key: null,
     title: '',
     description: "",
+    telefone: "",
     published: 'Unpublished',
   };
   
@@ -59,10 +60,10 @@ const Clinica = props => {
     <div>
       {currentTutorial ? (
         <div className="edit-form">
-          <h4>Tutorial</h4>
+          <h4>Clínica</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Nome</label>
               <input 
               type="text"
               className="form-control"
@@ -71,13 +72,24 @@ const Clinica = props => {
               value={currentTutorial.title}
               onChange={handleInputChange}
               />
-              <label htmlFor="description">Description</label>
+
+              <label htmlFor="description">Endereço</label>
               <input 
               type="text"
               className="form-control"
               id="description"
               name="description"
               value={currentTutorial.description}
+              onChange={handleInputChange}
+              />
+
+              <label htmlFor="telefone">Telefone</label>
+              <input 
+              type="tel"
+              className="form-control"
+              id="telefone"
+              name="telefone"
+              value={currentTutorial.telefone}
               onChange={handleInputChange}
               />
             </div>
