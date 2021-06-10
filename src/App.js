@@ -3,7 +3,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import  "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import Medico from "./components/Medico";
-import AddMedicos from "./components/AddMedicos";
+import MedicoAdd from "./components/MedicoAdd";
 import MedicoList from "./components/MedicoList";
 // import Paciente form "./component/Paciente";
 import AddPacientes from "./components/AddPacientes";
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/home"} className="navbar-brand">Home</Link>
+        <Link to={"/home"} className="navbar-brand"><h1>Home</h1></Link>
         <div className="navbar-nav mr-auto">
           <div class="dropdown">
             <button type="button" class="btn dropdown-toggle" id="buttonColor" data-toggle="dropdown">
@@ -30,7 +30,7 @@ function App() {
               <Link to={"/medicoList"} className="dropdown-item">
                 Lista de Médicos
               </Link>
-              <Link to={"/addMedicos"} className="dropdown-item">
+              <Link to={"/medicoAdd"} className="dropdown-item">
                 Adicionar Médico
               </Link>
             </div>
@@ -92,9 +92,9 @@ function App() {
       <div className="container mt-3">
         <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
-          <Route exact path="/medico" component={Medico} />
-          <Route exact path="/addMedicos" component={AddMedicos} />
-          <Route exact path="/medicoList" component={MedicoList} />
+          <Route exact path="/medico/:id" component={Medico} />
+          <Route exact path="/medicoAdd" component={MedicoAdd} />
+          <Route exact path={"/medicoList"} component={MedicoList} />
           {/*<Route exact path="/paciente" component={Paciente} />*/}
           <Route exact path="/addPacientes" component={AddPacientes} />
           <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
