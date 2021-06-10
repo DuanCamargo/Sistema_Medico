@@ -7,6 +7,7 @@ const AddClinicas = () => {
     id: null,
     title: "",
     description: "",
+    telefone: "",
     published: false
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
@@ -23,6 +24,7 @@ const AddClinicas = () => {
     var data = {
       title: tutorial.title,
       description: tutorial.description,
+      telefone: tutorial.telefone,
       published: false
     }
 
@@ -50,7 +52,7 @@ const AddClinicas = () => {
           {/**FORMULÁRIO PARA INCLUSÃO DOS DADOS */}
           <form onSubmit={saveTutorial}>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Nome</label>
               <input
               type="text"
               className="form-control"
@@ -62,7 +64,7 @@ const AddClinicas = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">Endereço</label>
               <input
                 type="text"
                 className="form-control"
@@ -71,6 +73,18 @@ const AddClinicas = () => {
                 value={tutorial.description}
                 onChange={handleInputChange}
                 name="description"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="telefone">Telefone</label>
+              <input
+                type="tel"
+                className="form-control"
+                id="telefone"
+                required
+                value={tutorial.telefone}
+                onChange={handleInputChange}
+                name="telefone"
               />
             </div>
             <button type="submit"

@@ -1,6 +1,6 @@
 let PRODUCTS =[
-    {title: 'Ola', description: 'Ola', published: 'Published'},
-    {title: 'Teste', description: 'Teste', published: 'Published'}
+    {title: 'Ola', description: 'Ola', telefone: '',published: 'Published'},
+    {title: 'Teste', description: 'Teste', telefone: '',published: 'Published'}
 ]
 
 //RETORNA OS DADOS

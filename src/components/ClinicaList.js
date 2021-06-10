@@ -50,13 +50,14 @@ const ClinicaList = () => {
         </div>
       </div>
       <div className="col-md-10">
-        <h4>Tutorial List</h4>
+        <h4>Lista de clínicas</h4>
         <table class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Endereço</th>
+              <th scope="col">Telefone</th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
@@ -69,6 +70,7 @@ const ClinicaList = () => {
                   <th scope="row">{tutorial.key}</th>
                   <td>{tutorial.title}</td>
                   <td>{tutorial.description}</td>
+                  <td>{tutorial.telefone}</td>
                   <td> <Link to={"/clinica/" + tutorial.title}
                     className="badge badge-warning">Edit</Link>
                   </td>
