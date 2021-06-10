@@ -36,10 +36,16 @@ const remove = (title) => {
     PRODUCTS = objetos;
 }
 
+const removeAll = () => {
+    var objetos = PRODUCTS.filter( item => false)
+    PRODUCTS = objetos;
+}
+
 export default {
     getAll,
     create,
     update,
     getById,
-    remove
+    remove,
+    removeAll
 };

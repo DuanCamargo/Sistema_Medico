@@ -19,7 +19,8 @@ const ClinicaList = () => {
   }
 
   const removeAllTutorials = () => {
-
+    ClinicaDataService.removeAll();
+    setTutorials(ClinicaDataService.getAll());
   }
 
   const findByTitle = () => {
