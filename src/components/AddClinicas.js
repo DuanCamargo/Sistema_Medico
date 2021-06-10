@@ -78,10 +78,6 @@ const AddClinicas = () => {
           </form>
         </div>
       )}
-
-      <div>
-      <Link to={"/clinicalist"}>ClinicaList</Link>
-      </div>
     </div>
   );
 };

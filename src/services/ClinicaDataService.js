@@ -31,9 +31,15 @@ const update = (key, data) => {
     return
 }
 
+const remove = (title) => {
+    var objetos = PRODUCTS.filter( item => item.title === title ? false : true)
+    PRODUCTS = objetos;
+}
+
 export default {
     getAll,
     create,
     update,
-    getById
+    getById,
+    remove
 };

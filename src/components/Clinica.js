@@ -71,7 +71,6 @@ const Clinica = props => {
               value={currentTutorial.title}
               onChange={handleInputChange}
               />
-
               <label htmlFor="description">Description</label>
               <input 
               type="text"
@@ -107,7 +106,7 @@ const Clinica = props => {
           <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
             Delete
           </button>
-          <Link to="/">
+          <Link to="/clinicalist">
             <button
               type="submit"
               className="badge badge-success"
@@ -121,7 +120,7 @@ const Clinica = props => {
       ) : (
         <div>
           <br />
-          <p>Please click on a Tutorial...</p>
+          <p>Clínica não encontrada...</p>
         </div>
       )}
     </div>

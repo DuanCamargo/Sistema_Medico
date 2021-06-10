@@ -14,7 +14,8 @@ const ClinicaList = () => {
   }
 
   const deleteTutorial = (id) => {
-
+    ClinicaDataService.remove(id);
+    setTutorials(ClinicaDataService.getAll)
   }
 
   const removeAllTutorials = () => {
