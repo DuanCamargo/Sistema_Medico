@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import MedicoDataService from "../services/MedicoDataService";
+import { Link } from "react-router-dom"
 
 const MedicoAdd = () => {
   const initialTutorialState = {
     id: null,
-    title: "",
-    description: "",
-    published: false
+    firstName: "",
+    lastName: "",
+    address: "",
+    jobArea: "",
+    CPF: "",
+    CRM: 0,
+    mobile: "",
+    email:"",
   };
 
   const [tutorial, setTutorial] = useState(initialTutorialState);
@@ -19,13 +25,37 @@ const MedicoAdd = () => {
 
   const saveTutorial = () => {
     var data = {
-      title: tutorial.title,
-      description: tutorial.description,
-      published: false
+      id: tutorial.id,
+      firstName: tutorial.firstName,
+      lastName: tutorial.lastName,
+      address: tutorial.address,
+      jobArea: tutorial.jobArea,
+      CPF: tutorial.CPF,
+      CRM: tutorial.CRM,
+      mobile: tutorial.mobile,
+      email: tutorial.email,
     };
 
-    MedicoDataService.create(data);
-    setSubmitted(true);
+    MedicoDataService.create(data)
+    .then(response => {
+      setTutorial({
+        id: response.data.id,
+        id: response.id,
+        firstName: response.firstName,
+        lastName: response.lastName,
+        address: response.address,
+        jobArea: response.jobArea,
+        CPF: response.CPF,
+        CRM: response.CRM,
+        mobile: response.mobile,
+        email: response.email,
+      });
+      setSubmitted(true);
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
   };
 
   const newTutorial = () => {
@@ -38,34 +68,100 @@ const MedicoAdd = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newTutorial}>
-            Add
-          </button>
+          <Link to="/">
+            <button className="btn btn-success" onClick={newTutorial}>
+              Add
+            </button>
+          </Link>
         </div>
       ) : (
         <div>
           <div className="form-group">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="firstName">firstName</label>
             <input
               type="text"
               className="form-control"
-              id="title"
-              required
-              value={tutorial.title}
+              id="firstName"
+              name="firstName"
+              value={tutorial.firstName}
               onChange={handleInputChange}
-              name="title"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="lastName">lastName</label>
             <input
               type="text"
               className="form-control"
-              id="description"
-              required
-              value={tutorial.description}
+              id="lastName"
+              name="lastName"
+              value={tutorial.lastName}
               onChange={handleInputChange}
-              name="description"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="address">address</label>
+            <input
+              type="text"
+              className="form-control"
+              id="address"
+              name="address"
+              value={tutorial.address}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="jobArea">jobArea</label>
+            <input
+              type="text"
+              className="form-control"
+              id="jobArea"
+              name="jobArea"
+              value={tutorial.jobArea}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="CPF">CPF</label>
+            <input
+              type="text"
+              className="form-control"
+              id="CPF"
+              name="CPF"
+              value={tutorial.CPF}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="CRM">CRM</label>
+            <input
+              type="text"
+              className="form-control"
+              id="CRM"
+              name="CRM"
+              value={tutorial.CRM}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="mobile">mobile</label>
+            <input
+              type="text"
+              className="form-control"
+              id="mobile"
+              name="mobile"
+              value={tutorial.mobile}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">email</label>
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              name="email"
+              value={tutorial.email}
+              onChange={handleInputChange}
             />
           </div>
           <button onClick={saveTutorial} className="btn btn-success">

@@ -4,29 +4,64 @@ import MedicoDataService from "../services/MedicoDataService";
 
 const MedicoList = () => {
   const [searchTitle, setSearchTitle] = useState("");
-  const [tutorials, setTutorials] = useState(MedicoDataService.getAll());
+  const [medicos, setmedicos] = useState();
+
+  const retrieveMedicos = () => {
+    MedicoDataService.getAll()
+      .then(response => {
+        setmedicos(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
 
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
   };
 
-  const deleteTutorial = (id) => {
+  const deleteMedico = (id) => {
     if (window.confirm('Deseja excluir?')){
-      MedicoDataService.remove(id);
+      MedicoDataService.remove(id)
+      .then(response => {
+        console.log(response.data)
+        retrieveMedicos()
+      })
+      .catch(e => {
+        console.log(e)
+      })
     }
   }
 
-  const removeAllTutorials = () => {
-    if (window.confirm('Deseja excluir?')){
-      MedicoDataService.removeAll();
-      setTutorials(MedicoDataService.getAll())
+  const removeAllmedicos = () => {
+    if (window.confirm('Deseja excluir tudo?')){
+      MedicoDataService.removeAll()
+      .then(response => {
+        console.log(response.data)
+        retrieveMedicos()
+      })
+      .catch(e => {
+        console.log(e)
+      })
     }
   };
 
   const findByTitle = () => {
-    setTutorials(MedicoDataService.getById(searchTitle))
+    MedicoDataService.findByTitle(searchTitle)
+    .then(response => {
+      setmedicos(response.data)
+      console.log(response.data)
+    })
+    .catch(e => {
+      console.log(e)
+    })
   };
+
+  useEffect(() => {
+    retrieveMedicos();
+  }, []);
 
   return (
     <div className="list row">
@@ -51,7 +86,7 @@ const MedicoList = () => {
         </div>
       </div>
       <div className="col-md-10">
-        <h4>Tutorials List</h4>
+        <h4>medicos List</h4>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -63,26 +98,31 @@ const MedicoList = () => {
             </tr>
           </thead>
           <tbody>
-          { 
-            tutorials &&
-            tutorials.map((tutorial, index) => (
+          {
+            medicos &&
+            medicos.map((tutorial, index) => (
               <tr>
                 <th scope="row">{tutorial.key}</th>
                 <td>{tutorial.title}</td>
                 <td>{tutorial.description}</td>
-                <td> <Link to={"/Medico/" + tutorial.title}
-                  className="btn btn-warning">Edit</Link>
+                <td> 
+                  <Link to={"/Medico/" + tutorial.id} className="btn btn-warning">
+                    Edit
+                  </Link>
                 </td>
-                <td> <Link onClick={() => deleteTutorial(tutorial.title)}
-                  className="btn btn-danger">Remove</Link>
+                <td>
+                  <Link onClick={() => deleteMedico(tutorial.id)} className="btn btn-danger">
+                    Remove
+                  </Link>
                 </td>
               </tr>
-            ))}
+            ))
+          }
             </tbody>
           </table>
         <button
           className="m-3 btn btn-sm btn-danger"
-          onClick={removeAllTutorials}>
+          onClick={removeAllmedicos}>
           Remove All
         </button>
       </div>
