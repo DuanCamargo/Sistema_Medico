@@ -13,6 +13,8 @@ const Clinica = props => {
   
   const [message, setMessage] = useState("");
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
+
+  //PARAMETRO PASSADO (TÍTULO)
   const [key, setKey] = useState(props.match.params.id)
 
   useEffect(()=>{
@@ -21,11 +23,14 @@ const Clinica = props => {
     setCurrentTutorial(data[0])
   }, [])
 
-  const handleInputChange = event => { // ele vai criar um item do objeto e vai colocar o valor nele.
+  //CRIA UM ITEM NO OBJETO COM O NAME DO INPUT E O VALUE DELE.
+  //TEM QUE SER UM QUE JÁ EXISTE NO OBJETO.
+  const handleInputChange = event => { 
     const {name, value} = event.target;
     setCurrentTutorial({...currentTutorial, [name] : value});
   }
 
+  //TRANSFORMANDO STATE PUBLISHED PARA BOOLEANO.
   const updatePublished = status => {
     const data = {
       title: currentTutorial.title,
@@ -64,6 +69,16 @@ const Clinica = props => {
               id="title"
               name="title"
               value={currentTutorial.title}
+              onChange={handleInputChange}
+              />
+
+              <label htmlFor="description">Description</label>
+              <input 
+              type="text"
+              className="form-control"
+              id="description"
+              name="description"
+              value={currentTutorial.description}
               onChange={handleInputChange}
               />
             </div>

@@ -14,7 +14,8 @@ const getById = (title) => {
     return filtrado
 };
 
-const create = (data) => { // colocando itens do formulário na variável PRODUCTS.
+// colocando itens do formulário na variável PRODUCTS.
+const create = (data) => { 
     return PRODUCTS.push(data);
 }
 

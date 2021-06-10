@@ -22,6 +22,7 @@ const ClinicaList = () => {
   }
 
   const findByTitle = () => {
+    setTutorials(ClinicaDataService.getById(searchTitle))
   }
 
   return (
