@@ -8,11 +8,14 @@ const Clinica = props => {
     key: null,
     title: '',
     description: "",
+    telefone: "",
     published: 'Unpublished',
   };
   
   const [message, setMessage] = useState("");
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
+
+  //PARAMETRO PASSADO (TÍTULO)
   const [key, setKey] = useState(props.match.params.id)
 
   useEffect(()=>{
@@ -21,11 +24,14 @@ const Clinica = props => {
     setCurrentTutorial(data[0])
   }, [])
 
-  const handleInputChange = event => { // ele vai criar um item do objeto e vai colocar o valor nele.
+  //CRIA UM ITEM NO OBJETO COM O NAME DO INPUT E O VALUE DELE.
+  //TEM QUE SER UM QUE JÁ EXISTE NO OBJETO.
+  const handleInputChange = event => { 
     const {name, value} = event.target;
     setCurrentTutorial({...currentTutorial, [name] : value});
   }
 
+  //TRANSFORMANDO STATE PUBLISHED PARA BOOLEANO.
   const updatePublished = status => {
     const data = {
       title: currentTutorial.title,
@@ -40,6 +46,7 @@ const Clinica = props => {
     const data = {
       title: currentTutorial.title,
       description: currentTutorial.description,
+      telefone: currentTutorial.telefone,
       published: currentTutorial.published
     }
     ClinicaDataService.update(key, data);
@@ -47,23 +54,48 @@ const Clinica = props => {
   }
 
   const deleteTutorial = () => {
+    if(window.confirm("Deseja deletar a clínica?")){
+      ClinicaDataService.remove(key);
 
+      //CHAMA A PAGINA LISTA DE CLINICAS
+      props.history.push("/clinicalist")
+    }
   };
 
   return (
-    <div>
+    <div className="clinica-box">
       {currentTutorial ? (
         <div className="edit-form">
-          <h4>Tutorial</h4>
+          <h4>Clínica</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Nome</label>
               <input 
               type="text"
               className="form-control"
               id="title"
               name="title"
               value={currentTutorial.title}
+              onChange={handleInputChange}
+              />
+
+              <label htmlFor="description">Endereço</label>
+              <input 
+              type="text"
+              className="form-control"
+              id="description"
+              name="description"
+              value={currentTutorial.description}
+              onChange={handleInputChange}
+              />
+
+              <label htmlFor="telefone">Telefone</label>
+              <input 
+              type="tel"
+              className="form-control"
+              id="telefone"
+              name="telefone"
+              value={currentTutorial.telefone}
               onChange={handleInputChange}
               />
             </div>
@@ -92,7 +124,7 @@ const Clinica = props => {
           <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
             Delete
           </button>
-          <Link to="/">
+          <Link to="/clinicalist">
             <button
               type="submit"
               className="badge badge-success"
@@ -106,7 +138,7 @@ const Clinica = props => {
       ) : (
         <div>
           <br />
-          <p>Please click on a Tutorial...</p>
+          <p>Clínica não encontrada...</p>
         </div>
       )}
     </div>

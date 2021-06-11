@@ -14,18 +14,23 @@ const ClinicaList = () => {
   }
 
   const deleteTutorial = (id) => {
-
+    if (window.confirm("Deseja realmente remover?")){
+      ClinicaDataService.remove(id);
+      setTutorials(ClinicaDataService.getAll)
+    }
   }
 
   const removeAllTutorials = () => {
-
+    ClinicaDataService.removeAll();
+    setTutorials(ClinicaDataService.getAll());
   }
 
   const findByTitle = () => {
+    setTutorials(ClinicaDataService.getById(searchTitle))
   }
 
   return (
-    <div className="list row">
+    <div className="list row clinica-list">
       <div className="col-md-10">
         <div className="input-group mb-3">
           <input 
@@ -47,13 +52,14 @@ const ClinicaList = () => {
         </div>
       </div>
       <div className="col-md-10">
-        <h4>Tutorial List</h4>
+        <h4>Lista de clínicas</h4>
         <table class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Endereço</th>
+              <th scope="col">Telefone</th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
@@ -66,6 +72,7 @@ const ClinicaList = () => {
                   <th scope="row">{tutorial.key}</th>
                   <td>{tutorial.title}</td>
                   <td>{tutorial.description}</td>
+                  <td>{tutorial.telefone}</td>
                   <td> <Link to={"/clinica/" + tutorial.title}
                     className="badge badge-warning">Edit</Link>
                   </td>
@@ -76,7 +83,7 @@ const ClinicaList = () => {
           </tbody>
         </table>
         <button
-        className="m-3 btn btn-sm btn-danger"
+        className="btn btn-danger"
         onClick={removeAllTutorials}>
           Remove All
         </button>

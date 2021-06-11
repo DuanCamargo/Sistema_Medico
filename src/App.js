@@ -79,7 +79,7 @@ function App() {
             Clínica
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <Link to={"/clínicaList"} className="dropdown-item">
+              <Link to={"/clinicalist"} className="dropdown-item">
                 Lista de Clínica
               </Link>
               <Link to={"/addClinicas"} className="dropdown-item">
