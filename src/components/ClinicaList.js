@@ -14,8 +14,10 @@ const ClinicaList = () => {
   }
 
   const deleteTutorial = (id) => {
-    ClinicaDataService.remove(id);
-    setTutorials(ClinicaDataService.getAll)
+    if (window.confirm("Deseja realmente remover?")){
+      ClinicaDataService.remove(id);
+      setTutorials(ClinicaDataService.getAll)
+    }
   }
 
   const removeAllTutorials = () => {
@@ -28,7 +30,7 @@ const ClinicaList = () => {
   }
 
   return (
-    <div className="list row">
+    <div className="list row clinica-list">
       <div className="col-md-10">
         <div className="input-group mb-3">
           <input 
@@ -81,7 +83,7 @@ const ClinicaList = () => {
           </tbody>
         </table>
         <button
-        className="m-3 btn btn-sm btn-danger"
+        className="btn btn-danger"
         onClick={removeAllTutorials}>
           Remove All
         </button>

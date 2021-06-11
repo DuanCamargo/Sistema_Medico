@@ -25,6 +25,7 @@ const update = (key, data) => {
         if (item.title === key){
             item.title = data.title;
             item.description = data.description;
+            item.telefone = data.telefone;
             item.published = data.published;
         }
     });
