@@ -46,6 +46,7 @@ const Clinica = props => {
     const data = {
       title: currentTutorial.title,
       description: currentTutorial.description,
+      telefone: currentTutorial.telefone,
       published: currentTutorial.published
     }
     ClinicaDataService.update(key, data);
@@ -62,7 +63,7 @@ const Clinica = props => {
   };
 
   return (
-    <div>
+    <div className="clinica-box">
       {currentTutorial ? (
         <div className="edit-form">
           <h4>Clínica</h4>
