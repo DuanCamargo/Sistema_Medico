@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MedicoDataService from "../services/MedicoDataService";
 
 const Medico = props => {
-  const initialTutorialState = {
+  const initialMedicoState = {
     key: null,
     firstName: "",
     lastName: "",
@@ -12,22 +12,19 @@ const Medico = props => {
     CRM: 0,
     mobile: "",
     email:"",
-    // title: "",
-    // description: "",
-    // published: "Unpublished",
   };
   const [message, setMessage] = useState("");
-  const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
+  const [currentMedico, setcurrentMedico] = useState(initialMedicoState);
   const [key, setKey] = useState(props.match.params.id)
 
   useEffect(() => {
-    getTutorial(key);
+    getMedico(key);
   }, [props.match.params.id]);
 
-  const getTutorial = id => {
+  const getMedico = id => {
     MedicoDataService.get(id)
     .then(response => {
-      setCurrentTutorial(response.data);
+      setcurrentMedico(response.data);
       console.log(response.data);
     })
     .catch(e => {
@@ -37,25 +34,25 @@ const Medico = props => {
 
   const   handleInputChange = event => {
     const { name, value } = event.target;
-    setCurrentTutorial({ ...currentTutorial, [name]: value });
+    setcurrentMedico({ ...currentMedico, [name]: value });
   };
 
-  const updatePublished = status => {
+  const updatePublished = () => {
     const data = {
-      id: currentTutorial.id,
-      firstName: currentTutorial.firstName,
-      lastName: currentTutorial.lastName,
-      address: currentTutorial.address,
-      jobArea: currentTutorial.jobArea,
-      CPF: currentTutorial.CPF,
-      CRM: currentTutorial.CRM,
-      mobile: currentTutorial.mobile,
-      email: currentTutorial.email,
+      id: currentMedico.id,
+      firstName: currentMedico.firstName,
+      lastName: currentMedico.lastName,
+      address: currentMedico.address,
+      jobArea: currentMedico.jobArea,
+      CPF: currentMedico.CPF,
+      CRM: currentMedico.CRM,
+      mobile: currentMedico.mobile,
+      email: currentMedico.email,
     };
 
     MedicoDataService.update(key, data)
     .then(response => {
-      setCurrentTutorial(response.data)
+      setcurrentMedico(response.data)
       console.log(response)
     })
     .catch(e => {
@@ -63,12 +60,12 @@ const Medico = props => {
     })
   };
 
-  const updateTutorial = () => {
-    MedicoDataService.update(key, currentTutorial)
+  const updateMedico = () => {
+    MedicoDataService.update(key, currentMedico)
     .then(response => {
       console.log(response);
       setMessage("Medico was updated successfully!");
-      props.history.push("/tutorials");
+      props.history.push("/medicoList");
     })
     .catch(e => {
       console.log(e)
@@ -77,10 +74,10 @@ const Medico = props => {
 
   const deleteTutorial = () => {
     if (window.confirm('Deseja excluir?')){
-      MedicoDataService.remove(currentTutorial.key)
+      MedicoDataService.remove(currentMedico.key)
       .then(response => {
         setMessage("Tutorial was deleted!")
-        props.history.push("/tutorials")
+        props.history.push("/medicoList")
       })
       .catch(e => {
         console.log(e)
@@ -91,18 +88,18 @@ const Medico = props => {
   return (
     <div>
     {
-      currentTutorial ? (
+      currentMedico ? (
         <div className="edit-form">
           <h4>Tutorial</h4>
             <form>
               <div className="form-group">
-                <label htmlFor="firstName">firstName</label>
+                <label htmlFor="firstName">First Name</label>
                 <input
                   type="text"
                   className="form-control"
                   id="firstName"
                   name="firstName"
-                  value={currentTutorial.firstName}
+                  value={currentMedico.firstName}
                   onChange={handleInputChange}
                 />
               </div>
@@ -113,7 +110,7 @@ const Medico = props => {
                   className="form-control"
                   id="lastName"
                   name="lastName"
-                  value={currentTutorial.lastName}
+                  value={currentMedico.lastName}
                   onChange={handleInputChange}
                 />
               </div>
@@ -124,18 +121,18 @@ const Medico = props => {
                   className="form-control"
                   id="address"
                   name="address"
-                  value={currentTutorial.address}
+                  value={currentMedico.address}
                   onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="jobArea">jobArea</label>
+                <label htmlFor="jobArea">Medical Specialty</label>
                 <input
                   type="text"
                   className="form-control"
                   id="jobArea"
                   name="jobArea"
-                  value={currentTutorial.jobArea}
+                  value={currentMedico.jobArea}
                   onChange={handleInputChange}
                 />
               </div>
@@ -146,7 +143,7 @@ const Medico = props => {
                   className="form-control"
                   id="CPF"
                   name="CPF"
-                  value={currentTutorial.CPF}
+                  value={currentMedico.CPF}
                   onChange={handleInputChange}
                 />
               </div>
@@ -157,7 +154,7 @@ const Medico = props => {
                   className="form-control"
                   id="CRM"
                   name="CRM"
-                  value={currentTutorial.CRM}
+                  value={currentMedico.CRM}
                   onChange={handleInputChange}
                 />
               </div>
@@ -168,7 +165,7 @@ const Medico = props => {
                   className="form-control"
                   id="mobile"
                   name="mobile"
-                  value={currentTutorial.mobile}
+                  value={currentMedico.mobile}
                   onChange={handleInputChange}
                 />
               </div>
@@ -179,13 +176,13 @@ const Medico = props => {
                   className="form-control"
                   id="email"
                   name="email"
-                  value={currentTutorial.email}
+                  value={currentMedico.email}
                   onChange={handleInputChange}
                 />
               </div>
             </form>
           {
-            currentTutorial.published ? (
+            currentMedico.published ? (
               <button
                 className="btn btn-primary mr-2"
                 onClick={() => updatePublished(false)}>
@@ -202,7 +199,7 @@ const Medico = props => {
           <button className="btn btn-danger mr-2" onClick={deleteTutorial}>
             Delete
           </button>
-          <button type="submit" className="btn btn-success" onClick={updateTutorial}>
+          <button type="submit" className="btn btn-success" onClick={updateMedico}>
             Update
           </button>
           <p>{message}</p>

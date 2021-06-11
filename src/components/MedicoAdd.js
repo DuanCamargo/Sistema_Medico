@@ -3,7 +3,7 @@ import MedicoDataService from "../services/MedicoDataService";
 import { Link } from "react-router-dom"
 
 const MedicoAdd = () => {
-  const initialTutorialState = {
+  const initialMedicoState = {
     id: null,
     firstName: "",
     lastName: "",
@@ -15,32 +15,32 @@ const MedicoAdd = () => {
     email:"",
   };
 
-  const [tutorial, setTutorial] = useState(initialTutorialState);
+  const [medico, setMedico] = useState(initialMedicoState);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setTutorial({ ...tutorial, [name]: value });
+    setMedico({ ...medico, [name]: value });
   };
 
-  const saveTutorial = () => {
+  const saveMedico = () => {
     var data = {
-      id: tutorial.id,
-      firstName: tutorial.firstName,
-      lastName: tutorial.lastName,
-      address: tutorial.address,
-      jobArea: tutorial.jobArea,
-      CPF: tutorial.CPF,
-      CRM: tutorial.CRM,
-      mobile: tutorial.mobile,
-      email: tutorial.email,
+      id: medico.id,
+      firstName: medico.firstName,
+      lastName: medico.lastName,
+      address: medico.address,
+      jobArea: medico.jobArea,
+      CPF: medico.CPF,
+      CRM: medico.CRM,
+      mobile: medico.mobile,
+      email: medico.email,
     };
 
     MedicoDataService.create(data)
     .then(response => {
-      setTutorial({
+      setMedico({
         id: response.data.id,
-        id: response.id,
+        // id: response.id,
         firstName: response.firstName,
         lastName: response.lastName,
         address: response.address,
@@ -58,8 +58,8 @@ const MedicoAdd = () => {
     });
   };
 
-  const newTutorial = () => {
-    setTutorial(initialTutorialState);
+  const newMedico = () => {
+    setMedico(initialMedicoState);
     setSubmitted(false);
   };
 
@@ -69,7 +69,7 @@ const MedicoAdd = () => {
         <div>
           <h4>You submitted successfully!</h4>
           <Link to="/">
-            <button className="btn btn-success" onClick={newTutorial}>
+            <button className="btn btn-success" onClick={newMedico}>
               Add
             </button>
           </Link>
@@ -77,46 +77,46 @@ const MedicoAdd = () => {
       ) : (
         <div>
           <div className="form-group">
-            <label htmlFor="firstName">firstName</label>
+            <label htmlFor="firstName">First Name</label>
             <input
               type="text"
               className="form-control"
               id="firstName"
               name="firstName"
-              value={tutorial.firstName}
+              value={medico.firstName}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="lastName">lastName</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
               type="text"
               className="form-control"
               id="lastName"
               name="lastName"
-              value={tutorial.lastName}
+              value={medico.lastName}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="address">address</label>
+            <label htmlFor="address">Address</label>
             <input
               type="text"
               className="form-control"
               id="address"
               name="address"
-              value={tutorial.address}
+              value={medico.address}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="jobArea">jobArea</label>
+            <label htmlFor="jobArea">Medical Specialty</label>
             <input
               type="text"
               className="form-control"
               id="jobArea"
               name="jobArea"
-              value={tutorial.jobArea}
+              value={medico.jobArea}
               onChange={handleInputChange}
             />
           </div>
@@ -127,7 +127,7 @@ const MedicoAdd = () => {
               className="form-control"
               id="CPF"
               name="CPF"
-              value={tutorial.CPF}
+              value={medico.CPF}
               onChange={handleInputChange}
             />
           </div>
@@ -138,33 +138,33 @@ const MedicoAdd = () => {
               className="form-control"
               id="CRM"
               name="CRM"
-              value={tutorial.CRM}
+              value={medico.CRM}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="mobile">mobile</label>
+            <label htmlFor="mobile">Mobile</label>
             <input
               type="text"
               className="form-control"
               id="mobile"
               name="mobile"
-              value={tutorial.mobile}
+              value={medico.mobile}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">email</label>
+            <label htmlFor="email">E-mail</label>
             <input
               type="text"
               className="form-control"
               id="email"
               name="email"
-              value={tutorial.email}
+              value={medico.email}
               onChange={handleInputChange}
             />
           </div>
-          <button onClick={saveTutorial} className="btn btn-success">
+          <button onClick={saveMedico} className="btn btn-success">
             Submit
           </button>
         </div>

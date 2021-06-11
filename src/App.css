@@ -15,7 +15,7 @@ body {
 
 .list {
   text-align: left;
-  max-width: 750px;
+  width: 1200px;
   margin: auto;
 }
 
@@ -27,4 +27,9 @@ body {
 .edit-form {
   max-width: 300px;
   margin: auto;
+}
+
+.x{
+  width: 100px;
+
 }

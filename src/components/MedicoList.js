@@ -90,28 +90,40 @@ const MedicoList = () => {
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th scope="col" class="x">#</th>
+              <th scope="col" class="x">Frist Name</th>
+              <th scope="col" class="x">Lasst Name</th>
+              <th scope="col" class="x">Address</th>
+              <th scope="col" class="x">Medical Specialty</th>
+              <th scope="col" class="x">CPF</th>
+              <th scope="col" class="x">CRM</th>
+              <th scope="col" class="x">Mobile</th>
+              <th scope="col" class="x">email</th>
+              <th scope="col" class="x"></th>
+              <th scope="col" class="x"></th>
             </tr>
           </thead>
           <tbody>
           {
             medicos &&
-            medicos.map((tutorial, index) => (
+            medicos.map((medico, index) => (
               <tr>
-                <th scope="row">{tutorial.key}</th>
-                <td>{tutorial.title}</td>
-                <td>{tutorial.description}</td>
+                <th scope="row">{medico.id}</th>
+                <td>{medico.firstName}</td>
+                <td>{medico.lastName}</td>
+                <td>{medico.address}</td>
+                <td>{medico.jobArea}</td>
+                <td>{medico.CPF}</td>
+                <td>{medico.CRM}</td>
+                <td>{medico.mobile}</td>
+                <td>{medico.email}</td>
                 <td> 
-                  <Link to={"/Medico/" + tutorial.id} className="btn btn-warning">
+                  <Link to={"/Medico/" + medico.id} className="btn btn-warning">
                     Edit
                   </Link>
                 </td>
                 <td>
-                  <Link onClick={() => deleteMedico(tutorial.id)} className="btn btn-danger">
+                  <Link onClick={() => deleteMedico(medico.id)} className="btn btn-danger">
                     Remove
                   </Link>
                 </td>

@@ -5,9 +5,9 @@ import './App.css';
 import Medico from "./components/Medico";
 import MedicoAdd from "./components/MedicoAdd";
 import MedicoList from "./components/MedicoList";
-// import Paciente form "./component/Paciente";
+import Paciente from "./components/Paciente";
 import AddPacientes from "./components/AddPacientes";
-// import PacienteList from "./components/PacienteList";
+import PacienteList from "./components/PacienteList";
 import AddEnfermeiras from "./components/AddEnfermeiras";
 import EnfermeiraList from "./components/EnfermeiraList";
 import Clinica from "./components/Clinica";
@@ -95,8 +95,9 @@ function App() {
           <Route exact path="/medico/:id" component={Medico} />
           <Route exact path="/medicoAdd" component={MedicoAdd} />
           <Route exact path={"/medicoList"} component={MedicoList} />
-          {/*<Route exact path="/paciente" component={Paciente} />*/}
+          <Route exact path="/paciente" component={Paciente} />
           <Route exact path="/addPacientes" component={AddPacientes} />
+          <Route exact path="/pacienteList" component={PacienteList} />
           <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
           <Route exact path="/enfermeiraList" component={EnfermeiraList} />
           <Route exact path="/addFuncionarios" component={AddFuncionarios} />
@@ -109,5 +110,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
