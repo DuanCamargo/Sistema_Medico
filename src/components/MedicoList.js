@@ -86,7 +86,6 @@ const MedicoList = () => {
         </div>
       </div>
       <div className="col-md-10">
-        <h4>medicos List</h4>
         <table class="table">
           <thead class="thead-dark">
             <tr>

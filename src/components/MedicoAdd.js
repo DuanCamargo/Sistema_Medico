@@ -40,7 +40,6 @@ const MedicoAdd = () => {
     .then(response => {
       setMedico({
         id: response.data.id,
-        // id: response.id,
         firstName: response.firstName,
         lastName: response.lastName,
         address: response.address,
@@ -68,7 +67,7 @@ const MedicoAdd = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <Link to="/">
+          <Link to="/medicoList">
             <button className="btn btn-success" onClick={newMedico}>
               Add
             </button>

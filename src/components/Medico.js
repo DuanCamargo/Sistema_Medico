@@ -37,29 +37,6 @@ const Medico = props => {
     setcurrentMedico({ ...currentMedico, [name]: value });
   };
 
-  const updatePublished = () => {
-    const data = {
-      id: currentMedico.id,
-      firstName: currentMedico.firstName,
-      lastName: currentMedico.lastName,
-      address: currentMedico.address,
-      jobArea: currentMedico.jobArea,
-      CPF: currentMedico.CPF,
-      CRM: currentMedico.CRM,
-      mobile: currentMedico.mobile,
-      email: currentMedico.email,
-    };
-
-    MedicoDataService.update(key, data)
-    .then(response => {
-      setcurrentMedico(response.data)
-      console.log(response)
-    })
-    .catch(e => {
-      console.log(e)
-    })
-  };
-
   const updateMedico = () => {
     MedicoDataService.update(key, currentMedico)
     .then(response => {
@@ -181,21 +158,6 @@ const Medico = props => {
                 />
               </div>
             </form>
-          {
-            currentMedico.published ? (
-              <button
-                className="btn btn-primary mr-2"
-                onClick={() => updatePublished(false)}>
-                  UnPublish
-              </button>
-            ) : (
-              <button
-                className="btn btn-primary mr-2"
-                onClick={() => updatePublished(true)}>
-                  Publish
-              </button>
-            )
-          }
           <button className="btn btn-danger mr-2" onClick={deleteTutorial}>
             Delete
           </button>
