@@ -4,12 +4,12 @@ import MedicoDataService from "../services/MedicoDataService";
 
 const MedicoList = () => {
   const [searchTitle, setSearchTitle] = useState("");
-  const [medicos, setmedicos] = useState();
+  const [medicos, setMedicos] = useState();
 
   const retrieveMedicos = () => {
     MedicoDataService.getAll()
       .then(response => {
-        setmedicos(response.data);
+        setMedicos(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -51,7 +51,7 @@ const MedicoList = () => {
   const findByTitle = () => {
     MedicoDataService.findByTitle(searchTitle)
     .then(response => {
-      setmedicos(response.data)
+      setMedicos(response.data)
       console.log(response.data)
     })
     .catch(e => {
@@ -70,7 +70,7 @@ const MedicoList = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Search by title"
+            placeholder="Search by name"
             value={searchTitle}
             onChange={onChangeSearchTitle}
           />
@@ -91,13 +91,13 @@ const MedicoList = () => {
             <tr>
               <th scope="col" class="x">#</th>
               <th scope="col" class="x">Frist Name</th>
-              <th scope="col" class="x">Lasst Name</th>
+              <th scope="col" class="x">Last Name</th>
               <th scope="col" class="x">Address</th>
               <th scope="col" class="x">Medical Specialty</th>
               <th scope="col" class="x">CPF</th>
               <th scope="col" class="x">CRM</th>
               <th scope="col" class="x">Mobile</th>
-              <th scope="col" class="x">email</th>
+              <th scope="col" class="x">Email</th>
               <th scope="col" class="x"></th>
               <th scope="col" class="x"></th>
             </tr>

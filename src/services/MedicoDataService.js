@@ -19,8 +19,8 @@ const remove = id => {
 const removeAll = () => {
   return http.delete(`/Medico`);
 };
-const findByTitle = title => {
-  return http.get(`/Medico?title=${title}`);
+const findByTitle = (search) => {
+  return http.get(`/Medico?firstName=${search}`);
 };
 
 export default {
