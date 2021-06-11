@@ -12,6 +12,17 @@ body {
 #buttonColor{
   color: blue;
 }
+
+.clinica-list {
+  margin: auto;
+  text-align: left;
+}
+
+.clinica-box {
+  width: 300px;
+  margin: auto;
+  text-align: left;
+}
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;

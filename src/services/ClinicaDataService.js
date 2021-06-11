@@ -1,6 +1,6 @@
 let PRODUCTS =[
-    {title: 'Ola', description: 'Ola', published: 'Published'},
-    {title: 'Teste', description: 'Teste', published: 'Published'}
+    {title: 'Ola', description: 'Ola', telefone: '',published: 'Published'},
+    {title: 'Teste', description: 'Teste', telefone: '',published: 'Published'}
 ]
 
 //RETORNA OS DADOS
@@ -14,7 +14,8 @@ const getById = (title) => {
     return filtrado
 };
 
-const create = (data) => { // colocando itens do formulário na variável PRODUCTS.
+// colocando itens do formulário na variável PRODUCTS.
+const create = (data) => { 
     return PRODUCTS.push(data);
 }
 
@@ -24,15 +25,28 @@ const update = (key, data) => {
         if (item.title === key){
             item.title = data.title;
             item.description = data.description;
+            item.telefone = data.telefone;
             item.published = data.published;
         }
     });
     return
 }
 
+const remove = (title) => {
+    var objetos = PRODUCTS.filter( item => item.title === title ? false : true)
+    PRODUCTS = objetos;
+}
+
+const removeAll = () => {
+    var objetos = PRODUCTS.filter( item => false)
+    PRODUCTS = objetos;
+}
+
 export default {
     getAll,
     create,
     update,
-    getById
+    getById,
+    remove,
+    removeAll
 };
