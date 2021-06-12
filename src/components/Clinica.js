@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ClinicaDataService from "../services/ClinicaDataService";
-import { Link } from "react-router-dom";
+import InputMask from 'react-input-mask'
 
 const Clinica = props => {
 
@@ -49,9 +49,10 @@ const Clinica = props => {
   };
 
   const updateClinica = () => {
-    ClinicaDataService.update(key, currentClinica)
+    ClinicaDataService.update(currentClinica.id, currentClinica)
       .then(response => {
         console.log(response);
+        props.history.push("/clinicalist");
       })
       .catch(e => {console.log(e)});
   }
@@ -97,7 +98,8 @@ const Clinica = props => {
               />
 
               <label htmlFor="telephone">Telefone</label>
-              <input 
+              <InputMask 
+              mask="(99) 9999-9999"
               type="tel"
               className="form-control"
               id="telephone"
@@ -111,7 +113,6 @@ const Clinica = props => {
           <button className="btn btn-danger mr-2" onClick={deleteClinica}>
             Delete
           </button>
-          <Link to="/clinicalist">
             <button
               type="submit"
               className="btn btn-success"
@@ -119,7 +120,6 @@ const Clinica = props => {
               >
                 Update
               </button>
-          </Link>
           <p>{message}</p>
           </div>
       ) : (
