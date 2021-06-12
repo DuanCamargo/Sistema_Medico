@@ -37,21 +37,12 @@ const Clinica = props => {
     setCurrentClinica({...currentClinica, [name] : value});
   }
 
-  //TRANSFORMANDO STATE PUBLISHED PARA BOOLEANO.
-  const updatePublished = status => {
-    const data = {
-      name: currentClinica.name,
-      address: currentClinica.address,
-      telephone: currentClinica.telephone
-    };
-    ClinicaDataService.update(key, data);
-    setCurrentClinica(data)
-  };
-
   const updateClinica = () => {
     ClinicaDataService.update(currentClinica.id, currentClinica)
       .then(response => {
         console.log(response);
+
+        //TIRANDO LINK E ADICIONANDO CHAMADA DA LISTA AQUI.
         props.history.push("/clinicalist");
       })
       .catch(e => {console.log(e)});
