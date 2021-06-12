@@ -4,131 +4,118 @@ import { Link } from "react-router-dom";
 
 const Clinica = props => {
 
-  const initialTutorialState = {
-    key: null,
-    title: '',
-    description: "",
-    telefone: "",
-    published: 'Unpublished',
+  const initialClinicaState = {
+    id: null,
+    name: '',
+    address: "",
+    telephone: "",
   };
   
   const [message, setMessage] = useState("");
-  const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
+  const [currentClinica, setCurrentClinica] = useState(initialClinicaState);
 
-  //PARAMETRO PASSADO (TÍTULO)
+  //PARAMETRO PASSADO (NAME)
   const [key, setKey] = useState(props.match.params.id)
 
+  const getClinica = id => {
+    ClinicaDataService.get(id)
+     .then(response => {
+       console.log(response)
+       setCurrentClinica(response.data);
+     })
+     .catch(e => {console.log(e)})
+  }
+
   useEffect(()=>{
-    const data = ClinicaDataService.getById(key)
-    console.log(key)
-    setCurrentTutorial(data[0])
+    getClinica(key)
   }, [])
 
   //CRIA UM ITEM NO OBJETO COM O NAME DO INPUT E O VALUE DELE.
   //TEM QUE SER UM QUE JÁ EXISTE NO OBJETO.
   const handleInputChange = event => { 
     const {name, value} = event.target;
-    setCurrentTutorial({...currentTutorial, [name] : value});
+    setCurrentClinica({...currentClinica, [name] : value});
   }
 
   //TRANSFORMANDO STATE PUBLISHED PARA BOOLEANO.
   const updatePublished = status => {
     const data = {
-      title: currentTutorial.title,
-      description: currentTutorial.description,
-      published: status
+      name: currentClinica.name,
+      address: currentClinica.address,
+      telephone: currentClinica.telephone
     };
     ClinicaDataService.update(key, data);
-    setCurrentTutorial(data)
+    setCurrentClinica(data)
   };
 
-  const updateTutorial = () => {
-    const data = {
-      title: currentTutorial.title,
-      description: currentTutorial.description,
-      telefone: currentTutorial.telefone,
-      published: currentTutorial.published
-    }
-    ClinicaDataService.update(key, data);
-    setCurrentTutorial(data)
+  const updateClinica = () => {
+    ClinicaDataService.update(key, currentClinica)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => {console.log(e)});
   }
 
-  const deleteTutorial = () => {
+  const deleteClinica = () => {
     if(window.confirm("Deseja deletar a clínica?")){
-      ClinicaDataService.remove(key);
+      ClinicaDataService.remove(key)
+        .then(response => {
+          console.log(response)
 
-      //CHAMA A PAGINA LISTA DE CLINICAS
-      props.history.push("/clinicalist")
+          //CHAMA A PAGINA LISTA DE CLINICAS
+          props.history.push("/clinicalist")
+        })
+        .catch(e => {console.log(e)})
     }
   };
 
   return (
     <div className="clinica-box">
-      {currentTutorial ? (
+      {currentClinica.id !== null ? (
         <div className="edit-form">
           <h4>Clínica</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="title">Nome</label>
+              <label htmlFor="name">Nome</label>
               <input 
               type="text"
               className="form-control"
-              id="title"
-              name="title"
-              value={currentTutorial.title}
+              id="name"
+              name="name"
+              value={currentClinica.name}
               onChange={handleInputChange}
               />
 
-              <label htmlFor="description">Endereço</label>
+              <label htmlFor="address">Endereço</label>
               <input 
               type="text"
               className="form-control"
-              id="description"
-              name="description"
-              value={currentTutorial.description}
+              id="address"
+              name="address"
+              value={currentClinica.address}
               onChange={handleInputChange}
               />
 
-              <label htmlFor="telefone">Telefone</label>
+              <label htmlFor="telephone">Telefone</label>
               <input 
               type="tel"
               className="form-control"
-              id="telefone"
-              name="telefone"
-              value={currentTutorial.telefone}
+              id="telephone"
+              name="telephone"
+              value={currentClinica.telephone}
               onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
-              <label>
-                <strong>Status:</strong>
-              </label>
-              {currentTutorial.published ? "Published" : "Pending"}
-            </div>
           </form>
-          {currentTutorial.published ? (
-            <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(false)}
-            >
-              UnPublish
-            </button>
-          ) : (
-            <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(true)}
-            >
-              Publish
-            </button>
-          )}
-          <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
+          
+          <button className="badge badge-danger mr-2" onClick={deleteClinica}>
             Delete
           </button>
           <Link to="/clinicalist">
             <button
               type="submit"
               className="badge badge-success"
-              onClick={updateTutorial}
+              onClick={updateClinica}
               >
                 Update
               </button>

@@ -1,52 +1,39 @@
-let PRODUCTS =[
-    {title: 'Ola', description: 'Ola', telefone: '',published: 'Published'},
-    {title: 'Teste', description: 'Teste', telefone: '',published: 'Published'}
-]
+import http from "../http-clinica";
 
-//RETORNA OS DADOS
 const getAll = () => {
-    return PRODUCTS;
+  return http.get("/Clinica");
 };
 
-const getById = (title) => {
-    if (title === "") return PRODUCTS
-    var filtrado = PRODUCTS.filter((obj) => obj.title.includes(title) );
-    return filtrado
+const get = id => {
+  return http.get(`/Clinica/${id}`);
 };
 
-// colocando itens do formulário na variável PRODUCTS.
-const create = (data) => { 
-    return PRODUCTS.push(data);
-}
+const create = data => {
+  return http.post("/Clinica", data);
+};
 
-const update = (key, data) => {
-    console.log(key)
-    PRODUCTS.forEach(function(item) {
-        if (item.title === key){
-            item.title = data.title;
-            item.description = data.description;
-            item.telefone = data.telefone;
-            item.published = data.published;
-        }
-    });
-    return
-}
+const update = (id, data) => {
+  return http.put(`/Clinica/${id}`, data);
+};
 
-const remove = (title) => {
-    var objetos = PRODUCTS.filter( item => item.title === title ? false : true)
-    PRODUCTS = objetos;
-}
-
+const remove = id => {
+  return http.delete(`/Clinica/${id}`);
+};
+//Nao tem esse endpoint no mockAPI
 const removeAll = () => {
-    var objetos = PRODUCTS.filter( item => false)
-    PRODUCTS = objetos;
-}
+  return http.delete(`/Clinica`);
+};
+
+const findByTitle = title => {
+  return http.get(`/Clinica?name=${title}`);
+};
 
 export default {
-    getAll,
-    create,
-    update,
-    getById,
-    remove,
-    removeAll
+  getAll,
+  get,
+  create,
+  update,
+  remove,
+  removeAll,
+  findByTitle
 };
