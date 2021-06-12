@@ -39,7 +39,7 @@ const AddClinicas = () => {
   }
   
   return (
-    <div className="submit-form clinica-box">
+    <div className="submit-form clinica-box text-left">
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
@@ -89,7 +89,7 @@ const AddClinicas = () => {
               />
             </div>
             <button type="submit"
-                    className="btn btn-success">Submit</button>
+                    className="btn btn-success">Adicionar</button>
           </form>
         </div>
       )}

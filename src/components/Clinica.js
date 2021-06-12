@@ -70,7 +70,7 @@ const Clinica = props => {
   };
 
   return (
-    <div className="clinica-box">
+    <div className="clinica-box text-left">
       {currentClinica.id !== null ? (
         <div className="edit-form">
           <h4>Clínica</h4>
