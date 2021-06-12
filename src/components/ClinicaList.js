@@ -5,7 +5,7 @@ import ClinicaDataService from '../services/ClinicaDataService'
 const ClinicaList = () => {
   
   const [searchTitle, setSearchTitle] = useState("");
-  const [tutorials, setTutorials] = useState(ClinicaDataService.getAll())
+  const [clinics, setClinics] = useState(ClinicaDataService.getAll())
 
 
   const onChangeSearchTitle = e => {
@@ -13,20 +13,20 @@ const ClinicaList = () => {
     setSearchTitle(searchTitle);
   }
 
-  const deleteTutorial = (id) => {
+  const deleteClinic = (id) => {
     if (window.confirm("Deseja realmente remover?")){
       ClinicaDataService.remove(id);
-      setTutorials(ClinicaDataService.getAll)
+      setClinics(ClinicaDataService.getAll)
     }
   }
 
-  const removeAllTutorials = () => {
+  const removeAllClinics = () => {
     ClinicaDataService.removeAll();
-    setTutorials(ClinicaDataService.getAll());
+    setClinics(ClinicaDataService.getAll());
   }
 
   const findByTitle = () => {
-    setTutorials(ClinicaDataService.getById(searchTitle))
+    setClinics(ClinicaDataService.getById(searchTitle))
   }
 
   return (
@@ -66,17 +66,17 @@ const ClinicaList = () => {
           </thead>
           <tbody>
             {
-              tutorials &&
-              tutorials.map((tutorial, index) => (
+              clinics &&
+              clinics.map((tutorial, index) => (
                 <tr>
-                  <th scope="row">{tutorial.key}</th>
-                  <td>{tutorial.title}</td>
-                  <td>{tutorial.description}</td>
-                  <td>{tutorial.telefone}</td>
-                  <td> <Link to={"/clinica/" + tutorial.title}
+                  <th scope="row">{tutorial.id}</th>
+                  <td>{tutorial.name}</td>
+                  <td>{tutorial.address}</td>
+                  <td>{tutorial.telephone}</td>
+                  <td> <Link to={"/clinica/" + tutorial.name}
                     className="badge badge-warning">Edit</Link>
                   </td>
-                  <td> <Link onClick={() => deleteTutorial(tutorial.title)}
+                  <td> <Link onClick={() => deleteClinic(tutorial.name)}
                   className="badge badge-danger">Remove</Link>
                   </td>
                 </tr>))}
@@ -84,7 +84,7 @@ const ClinicaList = () => {
         </table>
         <button
         className="btn btn-danger"
-        onClick={removeAllTutorials}>
+        onClick={removeAllClinics}>
           Remove All
         </button>
       </div>

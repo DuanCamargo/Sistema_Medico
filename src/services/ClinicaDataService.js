@@ -1,6 +1,6 @@
 let PRODUCTS =[
-    {title: 'Ola', description: 'Ola', telefone: '',published: 'Published'},
-    {title: 'Teste', description: 'Teste', telefone: '',published: 'Published'}
+    {name: 'Ola', address: 'Ola', telephone: ''},
+    {name: 'Teste', address: 'Teste', telephone: ''}
 ]
 
 //RETORNA OS DADOS
@@ -8,9 +8,9 @@ const getAll = () => {
     return PRODUCTS;
 };
 
-const getById = (title) => {
-    if (title === "") return PRODUCTS
-    var filtrado = PRODUCTS.filter((obj) => obj.title.includes(title) );
+const getById = (name) => {
+    if (name === "") return PRODUCTS
+    var filtrado = PRODUCTS.filter((obj) => obj.name.includes(name) );
     return filtrado
 };
 
@@ -22,18 +22,17 @@ const create = (data) => {
 const update = (key, data) => {
     console.log(key)
     PRODUCTS.forEach(function(item) {
-        if (item.title === key){
-            item.title = data.title;
-            item.description = data.description;
-            item.telefone = data.telefone;
-            item.published = data.published;
+        if (item.name === key){
+            item.name = data.name;
+            item.address = data.address;
+            item.telephone = data.telephone;
         }
     });
     return
 }
 
-const remove = (title) => {
-    var objetos = PRODUCTS.filter( item => item.title === title ? false : true)
+const remove = (name) => {
+    var objetos = PRODUCTS.filter( item => item.name === name ? false : true)
     PRODUCTS = objetos;
 }
 

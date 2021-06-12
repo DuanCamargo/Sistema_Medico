@@ -3,37 +3,35 @@ import ClinicaDataService from '../services/ClinicaDataService'
 import { Link } from "react-router-dom";
 
 const AddClinicas = () => {
-  const initialTutorialState = {
+  const initialClinicState = {
     id: null,
-    title: "",
-    description: "",
-    telefone: "",
-    published: false
+    name: "",
+    address: "",
+    telephone: "",
   };
-  const [tutorial, setTutorial] = useState(initialTutorialState);
+  const [clinica, setClinica] = useState(initialClinicState);
   const [submitted, setSubmitted] = useState(false);
 
   //PASSANDO NAME E VALUE PARA AS CONSTANTES, E ATRIBUINDO O ITEM DO OBJETO NAME O QUE TEM VALUE
   const handleInputChange = event => {
     const {name, value} = event.target;
-    setTutorial({...tutorial, [name]: value});
+    setClinica({...clinica, [name]: value});
   }
 
   //INSERINDO NOS DADOS.
-  const saveTutorial = () => {
+  const saveClinica = () => {
     var data = {
-      title: tutorial.title,
-      description: tutorial.description,
-      telefone: tutorial.telefone,
-      published: false
+      name: clinica.name,
+      address: clinica.address,
+      telephone: clinica.telephone,
     }
 
     ClinicaDataService.create(data);
     setSubmitted(true);
   };
 
-  const newTutorial = () => {
-    setTutorial(initialTutorialState);
+  const newClinic = () => {
+    setClinica(initialClinicState);
     setSubmitted(false);
   }
   
@@ -42,7 +40,7 @@ const AddClinicas = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newTutorial}>
+          <button className="btn btn-success" onClick={newClinic}>
             Add
           </button>
         </div>
@@ -50,41 +48,41 @@ const AddClinicas = () => {
         <div>
 
           {/**FORMULÁRIO PARA INCLUSÃO DOS DADOS */}
-          <form onSubmit={saveTutorial}>
+          <form onSubmit={saveClinica}>
             <div className="form-group">
-              <label htmlFor="title">Nome</label>
+              <label htmlFor="name">Nome</label>
               <input
               type="text"
               className="form-control"
-              id="title"
+              id="name"
               required
-              value={tutorial.title}
+              value={clinica.name}
               onChange={handleInputChange}
-              name="title"
+              name="name"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="description">Endereço</label>
+              <label htmlFor="address">Endereço</label>
               <input
                 type="text"
                 className="form-control"
-                id="description"
+                id="address"
                 required
-                value={tutorial.description}
+                value={clinica.address}
                 onChange={handleInputChange}
-                name="description"
+                name="address"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="telefone">Telefone</label>
+              <label htmlFor="telephone">Telefone</label>
               <input
                 type="tel"
                 className="form-control"
-                id="telefone"
+                id="telephone"
                 required
-                value={tutorial.telefone}
+                value={clinica.telephone}
                 onChange={handleInputChange}
-                name="telefone"
+                name="telephone"
               />
             </div>
             <button type="submit"
