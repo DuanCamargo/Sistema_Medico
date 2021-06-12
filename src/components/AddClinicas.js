@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import ClinicaDataService from '../services/ClinicaDataService'
-import { Link } from "react-router-dom";
 
 const AddClinicas = () => {
   const initialClinicState = {
@@ -26,7 +25,11 @@ const AddClinicas = () => {
       telephone: clinica.telephone,
     }
 
-    ClinicaDataService.create(data);
+    ClinicaDataService.create(data)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(e => {console.log(e)})
     setSubmitted(true);
   };
 

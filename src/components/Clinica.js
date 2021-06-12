@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Clinica = props => {
 
   const initialClinicaState = {
-    key: null,
+    id: null,
     name: '',
     address: "",
     telephone: "",
@@ -17,10 +17,17 @@ const Clinica = props => {
   //PARAMETRO PASSADO (NAME)
   const [key, setKey] = useState(props.match.params.id)
 
+  const getClinica = id => {
+    ClinicaDataService.get(id)
+     .then(response => {
+       console.log(response)
+       setCurrentClinica(response.data);
+     })
+     .catch(e => {console.log(e)})
+  }
+
   useEffect(()=>{
-    const data = ClinicaDataService.getById(key)
-    console.log(key)
-    setCurrentClinica(data[0])
+    getClinica(key)
   }, [])
 
   //CRIA UM ITEM NO OBJETO COM O NAME DO INPUT E O VALUE DELE.
@@ -42,27 +49,29 @@ const Clinica = props => {
   };
 
   const updateClinica = () => {
-    const data = {
-      name: currentClinica.name,
-      address: currentClinica.address,
-      telephone: currentClinica.telephone,
-    }
-    ClinicaDataService.update(key, data);
-    setCurrentClinica(data)
+    ClinicaDataService.update(key, currentClinica)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => {console.log(e)});
   }
 
   const deleteClinica = () => {
     if(window.confirm("Deseja deletar a clínica?")){
-      ClinicaDataService.remove(key);
+      ClinicaDataService.remove(key)
+        .then(response => {
+          console.log(response)
 
-      //CHAMA A PAGINA LISTA DE CLINICAS
-      props.history.push("/clinicalist")
+          //CHAMA A PAGINA LISTA DE CLINICAS
+          props.history.push("/clinicalist")
+        })
+        .catch(e => {console.log(e)})
     }
   };
 
   return (
     <div className="clinica-box">
-      {currentClinica ? (
+      {currentClinica.id !== null ? (
         <div className="edit-form">
           <h4>Clínica</h4>
           <form>

@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import ClinicaDataService from '../services/ClinicaDataService'
 
 const ClinicaList = () => {
   
   const [searchTitle, setSearchTitle] = useState("");
-  const [clinics, setClinics] = useState(ClinicaDataService.getAll())
+  const [clinics, setClinics] = useState([])
 
+  useEffect(() => {
+    retrieveClinics();
+  }, [])
+
+  const retrieveClinics = () => {
+    ClinicaDataService.getAll()
+      .then(response => {
+        setClinics(response.data);
+      })
+      .catch(e => {console.log(e)})
+  }
 
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
@@ -15,19 +26,40 @@ const ClinicaList = () => {
 
   const deleteClinic = (id) => {
     if (window.confirm("Deseja realmente remover?")){
-      ClinicaDataService.remove(id);
-      setClinics(ClinicaDataService.getAll)
+      ClinicaDataService.remove(id)
+        .then(response => {
+          console.log(response.data)
+          retrieveClinics();
+        })
+        .catch(e => {console.log(e)})
     }
   }
 
   const removeAllClinics = () => {
-    ClinicaDataService.removeAll();
-    setClinics(ClinicaDataService.getAll());
-  }
+    if(window.confirm("Deseja remover todos?")){
+      for (var indice in clinics) {
+        ClinicaDataService.remove(clinics[indice].id)
+        .then(response => {
+          console.log(response.data)
+          retrieveClinics()
+        })
+        .catch(e => {
+          console.log(e);
+        })
+      }
+    }  
+  };
 
   const findByTitle = () => {
-    setClinics(ClinicaDataService.getById(searchTitle))
-  }
+    ClinicaDataService.findByTitle(searchTitle)
+      .then(response => {
+        setClinics(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
 
   return (
     <div className="list row clinica-list">
@@ -67,16 +99,16 @@ const ClinicaList = () => {
           <tbody>
             {
               clinics &&
-              clinics.map((tutorial, index) => (
+              clinics.map((clinica) => (
                 <tr>
-                  <th scope="row">{tutorial.id}</th>
-                  <td>{tutorial.name}</td>
-                  <td>{tutorial.address}</td>
-                  <td>{tutorial.telephone}</td>
-                  <td> <Link to={"/clinica/" + tutorial.name}
+                  <th scope="row">{clinica.id}</th>
+                  <td>{clinica.name}</td>
+                  <td>{clinica.address}</td>
+                  <td>{clinica.telephone}</td>
+                  <td> <Link to={"/clinica/" + clinica.id}
                     className="badge badge-warning">Edit</Link>
                   </td>
-                  <td> <Link onClick={() => deleteClinic(tutorial.name)}
+                  <td> <Link onClick={() => deleteClinic(clinica.id)}
                   className="badge badge-danger">Remove</Link>
                   </td>
                 </tr>))}
