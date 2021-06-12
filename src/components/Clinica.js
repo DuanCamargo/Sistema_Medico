@@ -70,7 +70,7 @@ const Clinica = props => {
   };
 
   return (
-    <div className="clinica-box">
+    <div className="clinica-box text-left">
       {currentClinica.id !== null ? (
         <div className="edit-form">
           <h4>Clínica</h4>
@@ -108,13 +108,13 @@ const Clinica = props => {
             </div>
           </form>
           
-          <button className="badge badge-danger mr-2" onClick={deleteClinica}>
+          <button className="btn btn-danger mr-2" onClick={deleteClinica}>
             Delete
           </button>
           <Link to="/clinicalist">
             <button
               type="submit"
-              className="badge badge-success"
+              className="btn btn-success"
               onClick={updateClinica}
               >
                 Update

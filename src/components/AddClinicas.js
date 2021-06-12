@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import ClinicaDataService from '../services/ClinicaDataService'
+import InputMask from "react-input-mask"
 
 const AddClinicas = () => {
   const initialClinicState = {
@@ -37,9 +38,9 @@ const AddClinicas = () => {
     setClinica(initialClinicState);
     setSubmitted(false);
   }
-  
+
   return (
-    <div className="submit-form clinica-box">
+    <div className="submit-form clinica-box text-left">
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
@@ -78,8 +79,9 @@ const AddClinicas = () => {
             </div>
             <div className="form-group">
               <label htmlFor="telephone">Telefone</label>
-              <input
-                type="tel"
+              <InputMask
+                mask="(99) 9999-9999"
+                type="text"
                 className="form-control"
                 id="telephone"
                 required
@@ -89,7 +91,7 @@ const AddClinicas = () => {
               />
             </div>
             <button type="submit"
-                    className="btn btn-success">Submit</button>
+                    className="btn btn-success">Adicionar</button>
           </form>
         </div>
       )}

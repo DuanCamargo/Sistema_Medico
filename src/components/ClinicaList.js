@@ -22,6 +22,15 @@ const ClinicaList = () => {
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
+
+    ClinicaDataService.findByTitle(searchTitle)
+      .then(response => {
+        setClinics(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   const deleteClinic = (id) => {
@@ -51,14 +60,7 @@ const ClinicaList = () => {
   };
 
   const findByTitle = () => {
-    ClinicaDataService.findByTitle(searchTitle)
-      .then(response => {
-        setClinics(response.data);
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    
   };
 
   return (
@@ -68,19 +70,10 @@ const ClinicaList = () => {
           <input 
             type="text"
             className="form-control"
-            placeholder="Search by title"
+            placeholder="Buscar por nome"
             value={searchTitle}
             onChange={onChangeSearchTitle}
           />
-          <div className="input-group-append">
-            <button
-            className="btn btn-outline-secondary"
-            type="button"
-            onClick={findByTitle}
-            >
-              Search
-            </button>
-          </div>
         </div>
       </div>
       <div className="col-md-10">
