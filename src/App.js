@@ -8,7 +8,8 @@ import MedicoList from "./components/MedicoList";
 import Paciente from "./components/Paciente";
 import AddPacientes from "./components/AddPacientes";
 import PacienteList from "./components/PacienteList";
-import AddEnfermeiras from "./components/AddEnfermeiras";
+import Enfermeira from "./components/Enfermeira";
+import EnfermeiraAdd from "./components/EnfermeiraAdd";
 import EnfermeiraList from "./components/EnfermeiraList";
 import Clinica from "./components/Clinica";
 import AddClinicas from "./components/AddClinicas";
@@ -56,7 +57,7 @@ function App() {
               <Link to={"/enfermeiraList"} className="dropdown-item">
                 Lista de Enfermeira
               </Link>
-              <Link to={"/addEnfermeiras"} className="dropdown-item">
+              <Link to={"/enfermeiraAdd"} className="dropdown-item">
                 Adicionar Enfermeira
               </Link>
             </div>
@@ -98,7 +99,9 @@ function App() {
           <Route exact path="/paciente" component={Paciente} />
           <Route exact path="/addPacientes" component={AddPacientes} />
           <Route exact path="/pacienteList" component={PacienteList} />
-          <Route exact path="/addEnfermeiras" component={AddEnfermeiras} />
+          <Route exact path="/enfermeira/" component={Enfermeira} />
+          <Route path="/enfermeira/:id" component={Enfermeira} />
+          <Route exact path="/enfermeiraAdd" component={EnfermeiraAdd} />
           <Route exact path="/enfermeiraList" component={EnfermeiraList} />
           <Route exact path="/addFuncionarios" component={AddFuncionarios} />
           <Route exact path="/clinica/" component={Clinica} />

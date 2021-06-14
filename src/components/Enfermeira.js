@@ -1,120 +1,159 @@
 import React, { useState, useEffect } from "react";
-import TutorialDataService from "../services/EnfermeiraDataService";
-import { Link } from "react-router-dom";
+import EnfermeiraDataService from "../services/EnfermeiraDataService";
+
+//Nome, Sobrenome, CPF, Telefone, Endereço, Coren, e-mail
 
 const Enfermeira = props => {
-  const initialTutorialState = {
-    key: null,
-    titulo: "",
-    descricao: "",
-    published: "Unpublished",
+  const initialEnfermeiraState = {
+    id: null,
+    Nome: "",
+    Telefonee: "",
+    Sobrenome: "",
+    Email: "",
+    Endereco: "",
+    CPF: "",
+    Coren: 0,
   };
-
   const [message, setMessage] = useState("");
-  const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
-  const [key, setKey] = useState(props.match.params.id)
+  const [currentEnfermeira, setcurrentEnfermeira] = useState(initialEnfermeiraState);
+  const [id, setId] = useState(props.match.params.id)
 
-  useEffect(()=>{
-    const data = TutorialDataService.getById(key)
-    console.log(key)
-    setCurrentTutorial(data[0])     
-  }, [])
+  useEffect(() => { 
+    getEnfermeira(id);
+  }, [props.match.params.id]);
+
+  const getEnfermeira = id => {
+    EnfermeiraDataService.get(id)
+    .then(response => {
+      setcurrentEnfermeira(response.data);
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  };
 
   const   handleInputChange = event => {
     const { name, value } = event.target;
-    setCurrentTutorial({ ...currentTutorial, [name]: value });
+    setcurrentEnfermeira({ ...currentEnfermeira, [name]: value });
   };
 
-  const updatePublished = status => {
-    const data = {
-      titulo: currentTutorial.titulo,
-      descricao: currentTutorial.descricao,
-      published: status
-    };
-    TutorialDataService.update(key, data);  
-    setCurrentTutorial(data)
-  };
-
-  const updateTutorial = () => {
-    //console.log(currentTutorial)
-    const data = {
-      titulo: currentTutorial.titulo,
-      descricao: currentTutorial.descricao,
-      published: currentTutorial.published
-    };  
-    TutorialDataService.update(key, data);
-    setCurrentTutorial(data)
+  const updateEnfermeira = () => {
+    EnfermeiraDataService.update(id, currentEnfermeira)
+    .then(response => {
+      console.log(response);
+      setMessage("Enfermeira was updated successfully!");
+      props.history.push("/EnfermeiraList");
+    })
+    .catch(e => {
+      console.log(e)
+    })
   };
 
   const deleteTutorial = () => {
-    console.log(currentTutorial)
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.remove(currentTutorial.key);  
+      EnfermeiraDataService.remove(currentEnfermeira.id)
+      .then(response => {
+        setMessage("Tutorial was deleted!")
+        props.history.push("/EnfermeiraList")
+      })
+      .catch(e => {
+        console.log(e)
+      })
     }
-  };
+  }
 
   return (
     <div>
-      {currentTutorial ? (
+    {
+      currentEnfermeira ? (
         <div className="edit-form">
-          <h4>Tutorial</h4>
+          <h4>EDITAR ENFERMEIRA</h4>
             <form>
               <div className="form-group">
-                <label htmlFor="title">Título</label>
+                <label htmlFor="Nome">Nome</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="title"
-                  name="title"
-                  value={currentTutorial.titulo}
+                  id="Nome"
+                  name="Nome"
+                  value={currentEnfermeira.Nome}
                   onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="description">Descrição</label>
+                <label htmlFor="Sobrenome">Sobrenome</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="description"
-                  name="description"
-                  value={currentTutorial.descricao}
+                  id="Sobrenome"
+                  name="Sobrenome"
+                  value={currentEnfermeira.Sobrenome}
                   onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
-                {currentTutorial.published ? "Published" : "Pending"}
+                <label htmlFor="Endereco">Endereco</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="Endereco"
+                  name="Endereco"
+                  value={currentEnfermeira.Endereco}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="CPF">CPF</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="CPF"
+                  name="CPF"
+                  value={currentEnfermeira.CPF}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="Coren">Coren</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="Coren"
+                  name="Coren"
+                  value={currentEnfermeira.Coren}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="Telefonee">Telefonee</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="Telefonee"
+                  name="Telefonee"
+                  value={currentEnfermeira.Telefonee}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="Email">Email</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="Email"
+                  name="Email"
+                  value={currentEnfermeira.Email}
+                  onChange={handleInputChange}
+                />
               </div>
             </form>
-          {currentTutorial.published ? (
-            <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(false)}
-            >
-              UnPublish
-            </button>
-          ) : (
-            <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(true)}
-            >
-              Publish
-            </button>
-          )}
-          <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
+          <button className="btn btn-danger mr-2" onClick={deleteTutorial}>
             Delete
           </button>
-          <Link to="/">
-            <button
-              type="submit"
-              className="badge badge-success"
-              onClick={updateTutorial}
-            >
-              Update
-            </button>
-          </Link>
+          <button type="submit" className="btn btn-success" onClick={updateEnfermeira}>
+            Update
+          </button>
           <p>{message}</p>
         </div>
       ) : (
@@ -122,10 +161,9 @@ const Enfermeira = props => {
           <br />
           <p>Please click on a Tutorial...</p>
         </div>
-      )}
+      )
+    }
     </div>
   );
 };
-
 export default Enfermeira;
-
