@@ -67,7 +67,7 @@ const Medico = props => {
     {
       currentMedico ? (
         <div className="edit-form">
-          <h4>Tutorial</h4>
+          <h4>EDITAR MÉDICO</h4>
             <form>
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
