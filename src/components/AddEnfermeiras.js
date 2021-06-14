@@ -50,7 +50,7 @@ const AddEnfermeiras = () => {
               className="form-control"
               id="title"
               required
-              value={tutorial.titulo}
+              // value={tutorial.titulo}
               onChange={handleInputChange}
               name="title"
             />
@@ -62,7 +62,7 @@ const AddEnfermeiras = () => {
               className="form-control"
               id="description"
               required
-              value={tutorial.descricao}
+              // value={tutorial.descricao}
               onChange={handleInputChange}
               name="description"
             />
