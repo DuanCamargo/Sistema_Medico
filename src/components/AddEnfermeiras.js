@@ -43,16 +43,15 @@ const AddEnfermeiras = () => {
         </div>
       ) : (
         <div>
-          <div className="form-group">
+           <div className="form-group">
             <label htmlFor="title">Título</label>
             <input
               type="text"
               className="form-control"
               id="title"
-              required
-              // value={tutorial.titulo}
+              name="titulo"
+              value={tutorial.titulo}
               onChange={handleInputChange}
-              name="title"
             />
           </div>
           <div className="form-group">
@@ -61,10 +60,9 @@ const AddEnfermeiras = () => {
               type="text"
               className="form-control"
               id="description"
-              required
-              // value={tutorial.descricao}
+              name="descricao"
+              value={tutorial.descricao}
               onChange={handleInputChange}
-              name="description"
             />
           </div>
           <button onClick={saveTutorial} className="btn btn-success">
