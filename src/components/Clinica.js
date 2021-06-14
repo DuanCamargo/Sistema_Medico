@@ -5,10 +5,10 @@ import { AuthContext } from "../context/clinicaContext";
 
 const Clinica = props => {
 
-  const {initialClinicaState} = React.useContext(AuthContext);
+  const { initialClinicState } = React.useContext(AuthContext)
   
   const [message, setMessage] = useState("");
-  const [currentClinica, setCurrentClinica] = useState(initialClinicaState);
+  const [currentClinica, setCurrentClinica] = useState(initialClinicState);
 
   //PARAMETRO PASSADO (NAME)
   const [key, setKey] = useState(props.match.params.id)
@@ -59,6 +59,7 @@ const Clinica = props => {
 
   return (
     <div className="clinica-box text-left">
+      {console.log(currentClinica)}
       {currentClinica.id !== null ? (
         <div className="edit-form">
           <h4>Clínica</h4>
