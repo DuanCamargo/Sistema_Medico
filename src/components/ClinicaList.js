@@ -59,10 +59,6 @@ const ClinicaList = () => {
     }  
   };
 
-  const findByTitle = () => {
-    
-  };
-
   return (
     <div className="list row clinica-list">
       <div className="col-md-10">
