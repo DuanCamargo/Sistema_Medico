@@ -5,7 +5,7 @@ import { AuthContext } from "../context/clinicaContext";
 
 const Clinica = props => {
 
-  const initialClinicaState = React.useContext(AuthContext);
+  const {initialClinicaState} = React.useContext(AuthContext);
   
   const [message, setMessage] = useState("");
   const [currentClinica, setCurrentClinica] = useState(initialClinicaState);

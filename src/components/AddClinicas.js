@@ -4,8 +4,8 @@ import InputMask from "react-input-mask"
 import { AuthContext } from "../context/clinicaContext";
 
 const AddClinicas = () => {
-  const initialClinicState = React.useContext(AuthContext)
-  
+  const { initialClinicState } = React.useContext(AuthContext)
+
   const [clinica, setClinica] = useState(initialClinicState);
   const [submitted, setSubmitted] = useState(false);
 
@@ -49,6 +49,7 @@ const AddClinicas = () => {
         <div>
 
           {/**FORMULÁRIO PARA INCLUSÃO DOS DADOS */}
+          {console.log(initialClinicState)}
           <form onSubmit={saveClinica}>
             <div className="form-group">
               <label htmlFor="name">Nome</label>
