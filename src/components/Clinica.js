@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ClinicaDataService from "../services/ClinicaDataService";
 import InputMask from 'react-input-mask'
+import { AuthContext } from "../context/clinicaContext";
 
 const Clinica = props => {
 
-  const initialClinicaState = {
-    id: null,
-    name: '',
-    address: "",
-    telephone: "",
-  };
+  const initialClinicaState = React.useContext(AuthContext);
   
   const [message, setMessage] = useState("");
   const [currentClinica, setCurrentClinica] = useState(initialClinicaState);
