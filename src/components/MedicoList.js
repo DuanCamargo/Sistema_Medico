@@ -20,6 +20,8 @@ const MedicoList = () => {
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
+
+    findByTitle(searchTitle);
   };
 
   const deleteMedico = (id) => {
@@ -35,9 +37,11 @@ const MedicoList = () => {
     }
   }
 
-  const removeAllmedicos = () => {
-    if (window.confirm('Deseja excluir tudo?')){
-      MedicoDataService.removeAll()
+  console.log(medicos);
+
+  const removeAllMedicos = () => {
+    if(window.confirm("Deseja remover todos?")){
+      MedicoDataService.remove()
       .then(response => {
         console.log(response.data)
         retrieveMedicos()
@@ -45,10 +49,10 @@ const MedicoList = () => {
       .catch(e => {
         console.log(e)
       })
-    }
+    }  
   };
 
-  const findByTitle = () => {
+  const findByTitle = (searchTitle) => {
     MedicoDataService.findByTitle(searchTitle)
     .then(response => {
       setMedicos(response.data)
@@ -74,7 +78,7 @@ const MedicoList = () => {
             value={searchTitle}
             onChange={onChangeSearchTitle}
           />
-          <div className="input-group-append">
+          {/* <div className="input-group-append">
             <button
               className="btn btn-outline-secondary"
               type="button"
@@ -82,10 +86,11 @@ const MedicoList = () => {
             >
               Search
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="col-md-10">
+      <h4>LISTA DE MÉDICOS</h4>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -133,7 +138,7 @@ const MedicoList = () => {
           </table>
         <button
           className="m-3 btn btn-sm btn-danger"
-          onClick={removeAllmedicos}>
+          onClick={removeAllMedicos}>
           Remove All
         </button>
       </div>
